@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer with HTML and Javascript</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<table id="table-customer">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--<tr>
+      <td>D</td>
+      <td>D</td>
+      <td>D</td>
+    </tr>-->
+    </tbody>
+</table>
+
+<script>
+    fetch('http://localhost:8080/api/customers')
+        .then(response => response.json())
+        .then(customers => {
+            const tableCustomer = document.querySelector('#table-customer tbody');
+
+            for (let i = 0; i < customers.length; i++) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <tr>
+                  <td>${customers[i].id}</td>
+                  <td>${customers[i].firstName}</td>
+                  <td>${customers[i].lastName}</td>
+                </tr>
+              `;
+                tableCustomer.appendChild(row);
+            }
+        });
+
+</script>
+</body>
+</html>
